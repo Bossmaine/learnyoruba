@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Yoruba Aloud</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <!-- Linewesome -->
+    <link rel="stylesheet" href="lineawesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pagemodal">
+        <div class="preloader">
+            <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-ripple" style="background:0 0"><circle cx="50" cy="50" r="4.719" fill="none" stroke="#1D3F72" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="-1.5s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="-1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="27.591" fill="none" stroke="#5699D2" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="0s" repeatCount="indefinite"/></circle></svg>
+        </div>
+    </div>
+
+   <input type="checkbox" id="nav-toggle">
+    <div class="sidebar bg-dark">
+       <div class="sidebar-brand">
+       <!-- <img class="uk-margin-small-right in-offset-top-10" src="img/nan.png" alt="wave" width="95" height="50" data-uk-img> -->
+       Yoruba Aloud
+       </div>
+
+       <div class="sidebar-menu">
+       <ul>
+            <li>
+             <a href="dashboard.html" style="text-decoration: none;"><span class="lar la-chart-bar" style="color: #b6cc00;"></span><span>Dashboard</span></a>
+            </li>
+            <li>
+               <a href="categories.html" class="active" style="text-decoration: none;"><span class="las la-layer-group" style="color: #b6cc00;"></span><span>Categories</span></a>
+              </li>
+            <li>
+             <a href="learning.html" " style="text-decoration: none;"><span class="las la-file-upload" style="color: #b6cc00;"></span><span>Learning Materials</span></a>
+            </li>
+            <li>
+                <a href="quiz.html" style="text-decoration: none;"><span class="las la-file-upload" style="color: #b6cc00;"></span><span>Quiz</span></a>
+            </li>
+            <li>
+                <a href="admin.html" style="text-decoration: none;"><span class="las la-file-upload" style="color: #b6cc00;"></span><span>Admin Profile</span></a>
+            </li>
+            <li>
+             <a onclick="logout()" style="text-decoration: none;"><span class="las la-lock" style="color: #b6cc00;"></span><span class="logspan">Logout</span></a>
+            </li>
+       </ul>
+    </div>
+    </div>
+
+    <div class="main-content">
+       <header>
+           <h2>
+               <label for="nav-toggle">
+                   <span class="las la-bars"></span>
+               </label>
+                <span id="adminId"></span>
+           </h2>
+        </header>
+
+       <main>
+            <div class="dash-cards mb-5">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="las la-clipboard-list" style="color: #b6cc00; font-size: 32px;"></span>
+                        <div>
+                            <h6>Total Categories</h6>
+                            <h5 id="category"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="las la-layer-group" style="color: #b6cc00; font-size: 32px;"></span>
+                        <div>
+                            <h6>learning Materials</h6>
+                            <h5 id="learnmat"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="las la-file-invoice" style="color: #b6cc00; font-size: 32px;"></span>
+                        <div>
+                            <h6>Total Subcategories</h6>
+                            <h5 id="subCat"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dash-cards">
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="las la-check-square" style="color: #b6cc00; font-size: 32px;"></span>
+                        <div>
+                            <h6>Total Quiz</h6>
+                            <h5 id="quiz"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div class="card-body">
+                        <span class="las la-user-graduate" style="color: #b6cc00; font-size: 32px;"></span>
+                        <div>
+                            <h6>Total Students</h6>
+                            <h5 id="student"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <button class="top-three" onclick="studentModal(event)">Top three Students</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dash-modal" class="mymodal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                     <h2>Top three student</h2>
+                        <span class="close" onclick="closeDashModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="allstudent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row add-cat-sect mt-5">
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <h2 class="add-txt">Add Categories
+                    </h2>
+                    <form class="add-cat">
+                        <label for="categories" id="" class="font-mulish font-size-14 font-weight-600">Categories</label>
+                        <input type="text" name="categories" id="cat-name" class="input mb-3" placeholder="Enter Categories Here">
+            
+                        <label for="cat-img" class="font-mulish font-size-14 font-weight-600">Categories</label>
+                        <input type="file" id="cat-img" name="cat-img">
+                            
+                        <button class="button button-blue font-weight-700" type="button" onclick="creatCategories(event)">Create Category</button>
+                    </form>
+                </div>
+            
+                <div class="scroll-bg col-sm-12 col-md-12 col-lg-6 col-xl-6 cat-disp">
+                    <div class="scroll-div cat-disp">
+
+                    </div>
+            </div>
+
+            <div id="my-modal3" class="mymodal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                     <h2>Update Category</h2>
+                        <span class="close" onclick="closeModal3()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-right">
+                           <button class="ch-btn" onclick="chooseImg(event)">change image</button>
+                        </div>
+                     <form id="updForm">
+                         <label for="updateName" class="font-mulish font-size-14 font-weight-600">Category Name</label>
+                         <input type="text" name="updateName" id="updateName" class="input mb-3" placeholder="Enter Categories Name Here">
+                         <div class="getWrapp">
+                             <label for="updateName" class="font-mulish font-size-14 font-weight-600">Category Image link</label>
+                             <input type="text" name="updateName" id="updateNameImage" class="input mb-3" placeholder="Enter Categories Name Here">
+                         </div>
+                         <div class="wrapper">
+                             <label for="updateImage" class="font-mulish font-size-14 font-weight-600">Category Images</label>
+                             <input type="file" name="updateImage" id="updateImage" class="input mb-3" placeholder="Enter Categories Image Here">
+                         </div>
+                         <button class="button button-blue font-weight-700" onclick="updateCategory(event)">
+                             <div class="spinner-border spinner-border-sm text-light spin2" role="status">
+                                 <span class="sr-only"></span>
+                             </div>
+                             Update Category
+                         </button>
+                     </form>
+                    </div>
+                </div>
+             </div>
+       </main>     
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <!-- Custom Javascript -->
+    <script src="index.js"></script>
+    <script src="oauth.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
