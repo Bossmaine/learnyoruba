@@ -28,6 +28,12 @@ body {
     width: 100%;
 }
 
+.specta2 a {
+    display: flex;
+    text-align: center !important;
+    font-size: small;
+}
+
 form {
     width: 70%;
     margin: 5% auto;

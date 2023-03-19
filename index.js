@@ -68,16 +68,16 @@ function signUp(event) {
                 getSpin.style.display = "none";
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => error);
     }
 
 }
 
-document.addEventListener("keyup", function signUp(event) {
-    if (event.keyCode === 13) {
-      document.getElementById("s-up").click();
+window.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      document.getElementById('s-up').click();
     }
-  });
+});
 
 
 function logIn(event) {
@@ -116,7 +116,6 @@ function logIn(event) {
         fetch(url, logReq)
         .then(response => response.json())
         .then(result => {
-            console.log(result)
             localStorage.setItem('admin', JSON.stringify(result));
             const getItem = localStorage.getItem('admin');
             const theItem = JSON.parse(getItem);
@@ -133,15 +132,15 @@ function logIn(event) {
                 getSpin.style.display = "none";
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => error);
     }
 }
 
-document.addEventListener("keyup", function logIn(event) {
-    if (event.keyCode === 13) {
-      document.getElementById("l-in").click();
+window.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      document.getElementById('l-in').click();
     }
-  });
+});
 
 function dashBoardApi() {
     const myPageModal = document.querySelector(".pagemodal");
@@ -191,7 +190,7 @@ function dashBoardApi() {
 
         myPageModal.style.display = "none";
     })
-    .catch(error => console.log('error', error));
+    .catch(error => error);
 }
 
 dashBoardApi();
@@ -216,7 +215,6 @@ function getAllStudent() {
     fetch(url, dashReq)
     .then(response => response.json())
     .then (result => {
-        console.log(result)
 
         const allStudentDash = document.getElementById("table-id");
 
@@ -240,7 +238,7 @@ function getAllStudent() {
         }
         allStudentDash.innerHTML = allStudent;
     })
-    .catch(error => console.log('error', error));
+    .catch(error => error);
 }
 
 getAllStudent();
@@ -271,7 +269,6 @@ function studentModal(event) {
     fetch(url, dashReq)
     .then(response => response.json())
     .then(result => {
-        console.log(result)
         const getStudent = document.querySelector(".allstudent");
         if (result.length === 0) {
             getStudent.innerHTML = "No available categories!"
@@ -306,7 +303,7 @@ function studentModal(event) {
             getStudent.innerHTML = resultData;
         }
     })
-    .catch(error => console.log('error', error));
+    .catch(error => error);
 }
 
 function closeDashModal() {
@@ -366,11 +363,14 @@ function creatCategories(event) {
                     text: 'Category Created Successfully!',
                     confirmButtonColor: '#2D85DE'
             
+                    
             })
 
             setTimeout(() => {
                 location.reload() = "index.html"
             }, 3000)
+
+            getSpin.style.display = "none";
             }
 
             else {
@@ -379,11 +379,11 @@ function creatCategories(event) {
                     text: 'Category not created!',
                     confirmButtonColor: '#2D85DE'
                 })
+
+                getSpin.style.display = "none";
             }
             })
-        .catch(error => console.log('error', error)); 
-
-        getSpin.style.display = "none";
+        .catch(error => error); 
     }
 
 }
@@ -409,7 +409,6 @@ function dispCategory() {
     fetch(url, dashReq)
     .then(response => response.json())
     .then(result => {
-        console.log(result)
         const catDisp = document.querySelector(".scroll-div")
         result.map((item) => {
             catDash +=  `
@@ -427,7 +426,7 @@ function dispCategory() {
         catDisp.innerHTML = catDash;
 
     })
-    .catch(error => console.log('error', error)); 
+    .catch(error => error); 
 }
 
 dispCategory();
@@ -461,7 +460,6 @@ function openCategory(modalId) {
     fetch(url, upReq)
     .then(response => response.json())
     .then(result => {
-        console.log(result)
         const getUpName = document.getElementById("updateName")
         const getUpImg = document.getElementById("updateNameImage")
 
@@ -469,7 +467,7 @@ function openCategory(modalId) {
         getUpImg.setAttribute('value', `${result.image}`)
 
         })
-    .catch(error => console.log('error', error));
+    .catch(error => error);
  }
 
  function closeModal3() {
@@ -531,7 +529,7 @@ function openCategory(modalId) {
         fetch(url, upReq)
         .then(response => response.json())
         .then(result => {
-            console.log(result)
+
             if (result.status === "success") {
                 Swal.fire({
                     icon: 'success',
@@ -541,7 +539,9 @@ function openCategory(modalId) {
                 setTimeout(() => {
                     location.reload();
                 }, 3000)
+                getSpin.style.display = "none";
             }
+
             else{
                 Swal.fire({
                     icon: 'info',
@@ -551,7 +551,7 @@ function openCategory(modalId) {
                 getSpin.style.display = "none";
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => error);
     }
 }
 
@@ -573,7 +573,6 @@ function openCategory(modalId) {
     fetch(url, delReq)
     .then(response => response.json())
     .then(result => {
-        console.log(result)
         if (result.status === "success") {
             Swal.fire({
                 icon: 'success',
@@ -592,7 +591,7 @@ function openCategory(modalId) {
             })
         }
     })
-    .catch(error => console.log('error', error));
+    .catch(error => error);
 }
 
 function getItemUrl() {
@@ -616,7 +615,6 @@ function subCategory(event) {
     const subImg = document.getElementById("subCatImg").files[0];
 
     if (subName === "" || subImg === "") {
-
         Swal.fire({
             icon: 'info',
             text: 'All fields are required!',
@@ -625,7 +623,6 @@ function subCategory(event) {
         getSpin2.style.display = "none";
     } 
     else {
-        
         const myToken = localStorage.getItem("admin");
         const theToken = JSON.parse(myToken);
         const token = theToken.token;
@@ -647,7 +644,7 @@ function subCategory(event) {
     
         const url = "https://pluralcodesandbox.com/yorubalearning/api/admin/create_subcategory";
     
-            fetch(url, requestCat) 
+        fetch(url, requestCat) 
             .then(response => response.json())
             .then(result => {
                 if (result.status === "success") {
@@ -656,11 +653,13 @@ function subCategory(event) {
                         text: 'Category Created Successfully!',
                         confirmButtonColor: '#2D85DE'
                 
-                })
-    
-                setTimeout(() => {
-                    location.reload() = "details.html"
-                }, 3000)
+                    })
+
+                    setTimeout(() => {
+                        location.reload();
+                    }, 3000);
+
+                    getSpin2.style.display = "none";
                 }
     
                 else {
@@ -669,26 +668,22 @@ function subCategory(event) {
                         text: 'Sub-Category not created!',
                         confirmButtonColor: '#2D85DE'
                     })
-                }
-                })
-            .catch(error => console.log('error', error)); 
 
-            getSpin2.style.display = "none";
-    
+                    getSpin2.style.display = "none";
+                }
+            })
+            .catch(error => error);  
     }
 }
+
 
 function subCategoryList() {
     const params = new URLSearchParams(window.location.search);
     let getId = params.get('id');
 
-    console.log(getId);
-
     const myToken = localStorage.getItem("admin");
     const theToken = JSON.parse(myToken);
     const token = theToken.token;
-
-    console.log(token);
 
     var category = new Headers();
     category.append("Authorization", `Bearer ${token}`);
@@ -705,7 +700,6 @@ function subCategoryList() {
     fetch(url, dashReq)
     .then(response => response.json())
     .then(result => {
-        console.log(result)
         result?.map((item) => {
             items +=`
               <div class="col-sm-12 col-md-12 col-lg-6">
@@ -725,7 +719,7 @@ function subCategoryList() {
         })
 
     })
-    .catch(error => console.log('error', error)); 
+    .catch(error => error); 
 }
 
 subCategoryList();
@@ -773,7 +767,7 @@ function upDateAdmin(event) {
         fetch(url, requestUp)
         .then(response => response.json())
         .then(result => {
-            console.log(result)
+
             if(result.status === "success") {
                 Swal.fire({
                     icon: 'success',
@@ -792,7 +786,7 @@ function upDateAdmin(event) {
                 getSpinner1.style.display = "none";
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => error);
     }
 }
 
@@ -850,7 +844,7 @@ function upDatePassword(event) {
         fetch(url, requestUpAd)
         .then(response => response.json())
         .then(result => {
-            console.log(result)
+
 
             if(result.status === "success") {
                 Swal.fire({
@@ -872,7 +866,7 @@ function upDatePassword(event) {
             }
             
         })
-        .catch(error => console.log('error', error));
+        .catch(error => error);
     }
 }
 
